@@ -1,6 +1,12 @@
 const router = require("express").Router();
-const { getLoginPage } = require("../controller/loginController");
+const {
+  getLoginPage,
+  getSignUpPage,
+  postLogin,
+} = require("../controller/loginController");
 
 router.get("/", getLoginPage);
+router.get("/signup", getSignUpPage);
+router.post("/login", postLogin);
 
 module.exports = router;

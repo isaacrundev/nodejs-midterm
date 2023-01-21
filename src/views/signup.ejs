@@ -4,24 +4,28 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
+    <title>Sign Up</title>
   </head>
   <body>
-    <h2>Welcome back</h2>
-    <form action="/login">
+    <h2>Sign Up</h2>
+    <form action="/submit">
       <div>
         <div>User Name</div>
         <input type="text" name="username" />
       </div>
       <div>
+        <div>Email</div>
+        <input type="email" name="email" />
+      </div>
+      <div>
         <div>Password</div>
         <input type="password" name="password" />
       </div>
-      <button type="submit">Login</button>
+      <div>
+        <div>Confirm Password</div>
+        <input type="password" name="confirm-password" />
+      </div>
+      <button type="submit">Sign Up</button>
     </form>
-    <div>
-      <div>Not a member?</div>
-      <a href="/signup">Sign up</a>
-    </div>
   </body>
 </html>
