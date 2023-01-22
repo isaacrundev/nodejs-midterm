@@ -8,8 +8,7 @@ exports.getSignUpPage = (req, res, next) => {
 
 exports.postLogin = (req, res, next) => {
   const { username, password } = req.body;
-  console.log(username, password);
   username === "abc" && password === "123"
-    ? res.send(`<h1>Correct</h1>`)
+    ? res.render("main")
     : res.redirect("/");
 };
