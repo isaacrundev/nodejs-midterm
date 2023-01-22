@@ -18,6 +18,7 @@ app.use(bodyParser.json());
 app.use(methodOverride("_method"));
 
 app.use("/", require("./routes/index"));
+app.use("/main"), require("./routes/main");
 
 app.listen(port, async () => {
   console.log(`Listening to port ${port}`);
