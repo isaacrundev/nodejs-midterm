@@ -21,10 +21,31 @@ pool.query(sql, (err, data) => {
 
 const seedDB = () => {
   pool.query(`DROP TABLE IF EXISTS Blog`);
-  pool.query(`CREATE TABLE Blog(
+  pool.query(
+    `CREATE TABLE Blog(
     Id INT PRIMARY KEY AUTO_INCREMENT,
     Title VARCHAR(100) NOT NULL,
-    Content TEXT)`);
+    Content TEXT NOT NULL)`,
+    (err) => {
+      if (err) {
+        return console.error(err.message);
+      }
+      console.log(`Initial table added successfully`);
+    }
+  );
+  pool.query(
+    `
+    INSERT INTO Blog (Id, Title, Content) VALUES
+    (1, 'My First Article', 'This is my 1st article.'),
+    (2, 'Something interesting', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+    `,
+    (err) => {
+      if (err) {
+        return console.error(err.message);
+      }
+      console.log(`Initial data added successfully`);
+    }
+  );
 };
 
 module.exports = pool.promise();

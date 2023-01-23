@@ -33,7 +33,7 @@ app.listen(port, async () => {
   console.log(`Listening to port ${port}`);
   const [data] = await dbconnection.query("SELECT 1");
   if (data) {
-    console.log("DB fetching Succeeded");
+    console.log("DB fetched Successfully");
   } else {
     console.log(`DB fetching Failed`);
   }
