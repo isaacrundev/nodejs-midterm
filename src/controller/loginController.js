@@ -14,3 +14,7 @@ exports.postLogin = (req, res, next) => {
     res.send(`<h2>Login Failed</h2>`);
   }
 };
+
+exports.getLogoutPage = (req, res, next) => {
+  res.render("logout");
+};

@@ -1,6 +1,7 @@
 const router = require("express").Router();
-const { getMainPage } = require("../controller/mainController");
+const { getMainPage, getNewPostPage } = require("../controller/mainController");
 
-router.get("/main", getLoginPage);
+router.get("/", getMainPage);
+router.get("/new_post", getNewPostPage);
 
 module.exports = router;
