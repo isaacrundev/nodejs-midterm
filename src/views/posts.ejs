@@ -4,11 +4,16 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Main Page</title>
+    <title>Posts</title>
   </head>
   <body>
     <h3>Hi!</h3>
     <a href="/posts/new_post">New Post</a>
     <a href="/logout">Log out</a>
+    <% articles.forEach(article => { %>
+    <ul>
+      <li><%= article.Title %></li>
+    </ul>
+    <%}) %>
   </body>
 </html>

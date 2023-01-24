@@ -4,6 +4,7 @@ const sessions = require("express-session");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
+const morgan = require("morgan");
 
 const port = process.env.PORT || 7777;
 const app = express();
@@ -25,6 +26,7 @@ app.use(
     cookie: { maxAge: oneDay },
   })
 );
+app.use(morgan("dev"));
 
 app.use("/", require("./routes/index"));
 app.use("/posts", require("./routes/posts"));

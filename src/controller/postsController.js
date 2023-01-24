@@ -2,8 +2,9 @@ const Post = require("../model/Post_Model");
 
 exports.getAllPostsPage = (req, res, next) => {
   Post.find()
-    .then(([rows]) => {
-      res.render("posts", { model: rows });
+    .then(([articles]) => {
+      console.log(articles);
+      res.render("posts");
     })
     .catch((err) => console.error(err.message));
 };
