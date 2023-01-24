@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Post</title>
+  </head>
+  <body>
+    <h2>Edit Post</h2>
+    <form action="/posts/edit/<%= data[0].Id %> " method="post">
+      <div>
+        <div>Title</div>
+        <input type="text" name="Title" value="<%= data[0].Title %> " />
+      </div>
+      <div>
+        <div>Content</div>
+        <textarea name="Content" cols="30" rows="10">
+<%= data[0].Content %></textarea
+        >
+      </div>
+      <button type="submit">Submit</button><a href="/posts">Cancel</a>
+    </form>
+  </body>
+</html>

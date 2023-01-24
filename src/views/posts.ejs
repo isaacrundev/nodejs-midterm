@@ -12,7 +12,17 @@
     <a href="/logout">Log out</a>
     <% articles.forEach(article => { %>
     <ul>
-      <li><%= article.Title %></li>
+      <li>
+        <h4><%= article.Title %></h4>
+        <p><%= article.Content %></p>
+        <a href="/posts/edit/<%= article.Id %> ">Edit</a>
+        <form
+          action="/posts/delete/<%= article.Id %>?_method=DELETE"
+          method="post"
+        >
+          <button type="submit">Delete</button>
+        </form>
+      </li>
     </ul>
     <%}) %>
   </body>
