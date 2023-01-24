@@ -9,9 +9,9 @@ exports.getSignUpPage = (req, res, next) => {
 exports.postLogin = (req, res, next) => {
   const { username, password } = req.body;
   if (username === "abc" && password === "123") {
-    res.send(`<h2>Login Successful</h2>`);
+    res.redirect("/posts");
   } else {
-    res.send(`<h2>Login Failed</h2>`);
+    res.redirect("/");
   }
 };
 

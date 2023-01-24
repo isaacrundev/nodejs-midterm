@@ -27,7 +27,7 @@ app.use(
 );
 
 app.use("/", require("./routes/index"));
-app.use("/main", require("./routes/main"));
+app.use("/posts", require("./routes/posts"));
 
 app.listen(port, async () => {
   console.log(`Listening to port ${port}`);
