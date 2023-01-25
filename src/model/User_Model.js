@@ -13,7 +13,8 @@ module.exports = class User {
   }
 
   static validate(username, password) {
-    const sql = `SELECT * FROM Users WHERE Username = '${username}' AND Password = '${password}';`;
-    return db.execute(sql);
+    const sql = `SELECT * FROM Users WHERE Username = ? AND Password = ?;`;
+    const params = [username, password];
+    return db.execute(sql, params);
   }
 };

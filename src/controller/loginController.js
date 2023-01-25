@@ -23,7 +23,12 @@ exports.postSignUp = (req, res) => {
 exports.postLogin = (req, res) => {
   const { username, password } = req.body;
   User.validate(username, password)
-    .then()
+    .then(([data]) => {
+      if (data.length === 0) {
+        res.redirect("/");
+      }
+      res.redirect("/posts");
+    })
     .catch((err) => console.error(err.message));
 
   // if (username === "abc" && password === "123") {
@@ -34,5 +39,5 @@ exports.postLogin = (req, res) => {
 };
 
 exports.getLogoutPage = (req, res) => {
-  res.render("logout");
+  res.redirect("/");
 };
