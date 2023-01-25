@@ -11,7 +11,8 @@ exports.getSignUpPage = (req, res) => {
 exports.postSignUp = (req, res) => {
   const { Username, Password } = req.body;
 
-  const newUser = new User(Username, Password)
+  const newUser = new User(Username, Password);
+  newUser
     .save()
     .then(() => {
       res.redirect("/");
@@ -21,11 +22,15 @@ exports.postSignUp = (req, res) => {
 
 exports.postLogin = (req, res) => {
   const { username, password } = req.body;
-  if (username === "abc" && password === "123") {
-    res.redirect("/posts");
-  } else {
-    res.redirect("/");
-  }
+  User.validate(username, password)
+    .then()
+    .catch((err) => console.error(err.message));
+
+  // if (username === "abc" && password === "123") {
+  //   res.redirect("/posts");
+  // } else {
+  //   res.redirect("/");
+  // }
 };
 
 exports.getLogoutPage = (req, res) => {

@@ -12,12 +12,8 @@ module.exports = class User {
     return db.execute(sql, params);
   }
 
-  static find() {
-    const sql = "SELECT * FROM Users ORDER BY Id DESC;";
-    return db.query(sql);
-  }
-  static findById(id) {
-    const sql = "SELECT * FROM Users WHERE Id = ?;";
-    return db.execute(sql, [id]);
+  static validate(username, password) {
+    const sql = `SELECT * FROM Users WHERE Username = '${username}' AND Password = '${password}';`;
+    return db.execute(sql);
   }
 };
