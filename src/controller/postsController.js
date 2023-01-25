@@ -35,10 +35,9 @@ exports.getPostsById = (req, res) => {
 };
 
 exports.postEditPostById = (req, res) => {
-  const id = req.params.id;
+  const Id = req.params.id;
   const { Title, Content } = req.body;
-  const data = { Id: id, Title: Title, Content: Content };
-  Post.Update(data)
+  Post.Update(Title, Content, Id)
     .then(() => {
       res.redirect("/posts");
     })

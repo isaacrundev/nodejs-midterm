@@ -20,9 +20,9 @@ module.exports = class Post {
     const sql = "SELECT * FROM Blog WHERE Id = ?;";
     return db.execute(sql, [id]);
   }
-  static Update(data) {
+  static Update(Title, Content, Id) {
     const sql = "UPDATE Blog SET Title = ?, Content = ? WHERE (Id = ?);";
-    const params = [data.Title, data.Content, data.Id];
+    const params = [Title, Content, Id];
     return db.execute(sql, params);
   }
   static Delete(id) {

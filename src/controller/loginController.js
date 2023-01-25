@@ -1,12 +1,25 @@
-exports.getLoginPage = (req, res, next) => {
+const User = require("../model/User_Model");
+
+exports.getLoginPage = (req, res) => {
   res.render("login");
 };
 
-exports.getSignUpPage = (req, res, next) => {
+exports.getSignUpPage = (req, res) => {
   res.render("signup");
 };
 
-exports.postLogin = (req, res, next) => {
+exports.postSignUp = (req, res) => {
+  const { Username, Password } = req.body;
+
+  const newUser = new User(Username, Password)
+    .save()
+    .then(() => {
+      res.redirect("/");
+    })
+    .catch((err) => console.error(err.message));
+};
+
+exports.postLogin = (req, res) => {
   const { username, password } = req.body;
   if (username === "abc" && password === "123") {
     res.redirect("/posts");
@@ -15,6 +28,6 @@ exports.postLogin = (req, res, next) => {
   }
 };
 
-exports.getLogoutPage = (req, res, next) => {
+exports.getLogoutPage = (req, res) => {
   res.render("logout");
 };
