@@ -8,24 +8,25 @@ const pool = mysql.createPool({
   port: process.env.MYSQLPORT,
 });
 
-const blogDataSql = `SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='railway' AND TABLE_NAME='Blog';`;
+const articlesDataSql = `SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='railway' AND TABLE_NAME='Articles';`;
 
-pool.query(blogDataSql, (err, data) => {
+pool.query(articlesDataSql, (err, data) => {
   if (err) {
     return console.error(err.message);
   }
   if (data.length === 0) {
-    console.log(`Table 'Blog' doesn't exist`);
-    blogSeedDB();
+    console.log(`Table 'Articles' doesn't exist`);
+    articlesSeedDB();
   }
 });
 
-const blogSeedDB = () => {
-  pool.query(`DROP TABLE IF EXISTS Blog;`);
+const articlesSeedDB = () => {
+  // pool.query(`DROP TABLE IF EXISTS Articles;`);
   pool.query(
     `
-    CREATE TABLE Blog(
+    CREATE TABLE Articles(
     Id INT PRIMARY KEY AUTO_INCREMENT,
+    Username VARCHAR(16) NOT NULL,
     Title VARCHAR(100) NOT NULL,
     Content TEXT NOT NULL);
     `,
@@ -33,20 +34,20 @@ const blogSeedDB = () => {
       if (err) {
         return console.error(err.message);
       }
-      console.log(`Initial 'Blog' table added successfully`);
+      console.log(`Initial 'Articles' table added successfully`);
     }
   );
   pool.query(
     `
-    INSERT INTO Blog (Id, Title, Content) VALUES
-    (1, 'My First Article', 'This is my 1st article.'),
-    (2, 'Wanna see something interesting?', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+    INSERT INTO Articles (Id, Username, Title, Content) VALUES
+    (1, 'abc', 'My First Article', 'This is my 1st article.'),
+    (2, 'test','Wanna see something interesting?', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ');
     `,
     (err) => {
       if (err) {
         return console.error(err.message);
       }
-      console.log(`Initial 'Blog' data added successfully`);
+      console.log(`Initial 'Articles' data added successfully`);
     }
   );
 };
@@ -64,7 +65,7 @@ pool.query(userDataSql, (err, data) => {
 });
 
 const usersSeedDB = () => {
-  pool.query(`DROP TABLE IF EXISTS Users;`);
+  // pool.query(`DROP TABLE IF EXISTS Users;`);
   pool.query(
     `CREATE TABLE Users(
       Username VARCHAR(16) PRIMARY KEY,
@@ -104,7 +105,7 @@ pool.query(commentDataSql, (err, data) => {
 });
 
 const commentsSeedDB = () => {
-  pool.query(`DROP TABLE IF EXISTS Comments;`);
+  // pool.query(`DROP TABLE IF EXISTS Comments;`);
   pool.query(
     `CREATE TABLE Comments(
       Id INT PRIMARY KEY AUTO_INCREMENT,
