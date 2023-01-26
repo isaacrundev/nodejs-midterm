@@ -1,7 +1,15 @@
 const User = require("../model/User_Model");
 
+let session;
+
 exports.getLoginPage = (req, res) => {
   res.render("login");
+  // session = req.session;
+  // if (session.userid) {
+  //   res.redirect("/posts");
+  // } else {
+  //   res.render("login");
+  // }
 };
 
 exports.getSignUpPage = (req, res) => {
@@ -26,18 +34,18 @@ exports.postLogin = (req, res) => {
     .then(([data]) => {
       if (data.length === 0) {
         res.redirect("/");
+      } else {
+        session = req.session;
+        session.userid = username;
+        res.redirect("/posts");
       }
-      res.redirect("/posts");
     })
     .catch((err) => console.error(err.message));
-
-  // if (username === "abc" && password === "123") {
-  //   res.redirect("/posts");
-  // } else {
-  //   res.redirect("/");
-  // }
 };
 
 exports.getLogoutPage = (req, res) => {
+  req.session.destroy();
   res.redirect("/");
 };
+
+exports.session;

@@ -5,12 +5,11 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
-const morgan = require("morgan");
 
 const port = process.env.PORT || 7777;
 const app = express();
 const dbconnection = require("./util/mysql");
-const oneDay = 1000 * 60 * 60 * 24;
+const sessionTime = 1000 * 60;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -21,13 +20,12 @@ app.use(bodyParser.json());
 app.use(methodOverride("_method"));
 app.use(
   sessions({
-    secret: "aloha",
+    secret: process.env.SESSION_SECRET,
     saveUninitialized: true,
     resave: false,
-    cookie: { maxAge: oneDay },
+    cookie: { maxAge: sessionTime },
   })
 );
-app.use(morgan("dev"));
 
 app.use("/", require("./routes/index"));
 app.use("/posts", require("./routes/posts"));

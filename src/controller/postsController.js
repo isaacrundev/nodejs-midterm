@@ -3,7 +3,6 @@ const Post = require("../model/Post_Model");
 exports.getAllPostsPage = (req, res) => {
   Post.find()
     .then(([articles]) => {
-      console.log(articles);
       res.render("posts", { articles: articles });
     })
     .catch((err) => console.error(err.message));
