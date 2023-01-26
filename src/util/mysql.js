@@ -91,4 +91,47 @@ const usersSeedDB = () => {
   );
 };
 
+const commentDataSql = `SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='railway' AND TABLE_NAME='Comments';`;
+
+pool.query(userDataSql, (err, data) => {
+  if (err) {
+    return console.error(err.message);
+  }
+  if (data.length === 0) {
+    console.log(`Table 'Comments' doesn't exist`);
+    commentsSeedDB();
+  }
+});
+
+const commentsSeedDB = () => {
+  pool.query(`DROP TABLE IF EXISTS Comments;`);
+  pool.query(
+    `CREATE TABLE Users(
+      Id INT PRIMARY KEY AUTO_INCREMENT,
+      Article_ID INT NOT NULL
+      Username VARCHAR(16) NOT NULL,
+      Comment CHAR(255) NOT NULL
+      );`,
+    (err) => {
+      if (err) {
+        return console.error(err.message);
+      }
+      console.log(`Initial 'Users' table added successfully`);
+    }
+  );
+  pool.query(
+    `
+    INSERT INTO Users (Id, Article_ID, Username, Comment) VALUES
+    (1, 1, 'abc', 'First comment'),
+    (2, 2, 'abc', 'ji32k7au4a83');
+    `,
+    (err) => {
+      if (err) {
+        return console.error(err.message);
+      }
+      console.log(`Initial 'Users' data added successfully`);
+    }
+  );
+};
+
 module.exports = pool.promise();
