@@ -1,9 +1,11 @@
 const Post = require("../model/Post_Model");
+const Comment = require("../model/Comment_Model");
 
 exports.getAllPostsPage = (req, res) => {
+  const Username = req.session.userid;
   Post.find()
     .then(([articles]) => {
-      res.render("posts", { articles: articles });
+      res.render("posts", { articles: articles, username: Username });
     })
     .catch((err) => console.error(err.message));
 };
@@ -14,8 +16,9 @@ exports.getNewPostPage = (req, res) => {
 
 exports.postNewPost = (req, res) => {
   const { Title, Content } = req.body;
+  const Username = req.session.userid;
 
-  const newPost = new Post(Title, Content);
+  const newPost = new Post(Username, Title, Content);
   newPost
     .save()
     .then(() => {
@@ -47,6 +50,18 @@ exports.postDeletePost = (req, res) => {
   const id = req.params.id;
 
   Post.Delete(id)
+    .then(() => {
+      res.redirect("/posts");
+    })
+    .catch((err) => console.error(err.message));
+};
+
+exports.postNewComment = (req, res) => {
+  const Username = req.session.userid;
+  const { Article_ID, CommentInput } = req.body;
+  const newComment = new Comment(Article_ID, Username, CommentInput);
+  newComment
+    .save()
     .then(() => {
       res.redirect("/posts");
     })

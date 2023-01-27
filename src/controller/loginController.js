@@ -4,12 +4,6 @@ let session;
 
 exports.getLoginPage = (req, res) => {
   res.render("login");
-  // session = req.session;
-  // if (session.userid) {
-  //   res.redirect("/posts");
-  // } else {
-  //   res.render("login");
-  // }
 };
 
 exports.getSignUpPage = (req, res) => {

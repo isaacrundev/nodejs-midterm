@@ -9,7 +9,7 @@ const methodOverride = require("method-override");
 const port = process.env.PORT || 7777;
 const app = express();
 const dbconnection = require("./util/mysql");
-const sessionTime = 1000 * 60;
+const sessionTime = 10 * 1000 * 60;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());

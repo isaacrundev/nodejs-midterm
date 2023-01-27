@@ -1,14 +1,15 @@
 const db = require("../util/mysql");
 
 module.exports = class Post {
-  constructor(Title, Content) {
+  constructor(Username, Title, Content) {
+    this.Username = Username;
     this.Title = Title;
     this.Content = Content;
   }
 
   save() {
-    const sql = `INSERT INTO Articles (Title, Content) VALUES (?, ?);`;
-    const params = [this.Title, this.Content];
+    const sql = `INSERT INTO Articles (Username, Title, Content) VALUES (?, ?, ?);`;
+    const params = [this.Username, this.Title, this.Content];
     return db.execute(sql, params);
   }
 
@@ -21,7 +22,7 @@ module.exports = class Post {
     return db.execute(sql, [id]);
   }
   static Update(Title, Content, Id) {
-    const sql = "UPDATE  SET Title = ?, Content = ? WHERE (Id = ?);";
+    const sql = "UPDATE Articles SET Title = ?, Content = ? WHERE (Id = ?);";
     const params = [Title, Content, Id];
     return db.execute(sql, params);
   }

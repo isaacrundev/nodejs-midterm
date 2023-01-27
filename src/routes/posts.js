@@ -8,5 +8,5 @@ router.get("/edit/:id", checkSession, postsController.getPostsById);
 router.post("/edit/:id", checkSession, postsController.postEditPostById);
 router.post("/submit", checkSession, postsController.postNewPost);
 router.delete("/delete/:id", checkSession, postsController.postDeletePost);
-
+router.post("/post_comment", checkSession, postsController.postNewComment);
 module.exports = router;

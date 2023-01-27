@@ -8,8 +8,17 @@ module.exports = class Comment {
   }
 
   save() {
-    const sql = `INSERT INTO Users (Username, Password) VALUES (?, ?, ?);`;
+    const sql = `INSERT INTO Comments (Article_ID, Username, Comment) VALUES (?, ?, ?);`;
     const params = [this.Article_ID, this.Username, this.Comment];
     return db.execute(sql, params);
+  }
+
+  static find() {
+    const sql = "SELECT * FROM Comments ORDER BY Id DESC;";
+    return db.query(sql);
+  }
+  static findById(id) {
+    const sql = "SELECT * FROM Comments WHERE Id = ?;";
+    return db.execute(sql, [id]);
   }
 };
