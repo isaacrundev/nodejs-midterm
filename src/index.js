@@ -3,7 +3,7 @@ const express = require("express");
 const sessions = require("express-session");
 const path = require("path");
 const cookieParser = require("cookie-parser");
-const bodyParser = require("body-parser");
+// const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 
 const port = process.env.PORT || 7777;
@@ -11,12 +11,12 @@ const app = express();
 const dbconnection = require("./util/mysql");
 const sessionTime = 10 * 1000 * 60;
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(

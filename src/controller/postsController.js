@@ -3,9 +3,19 @@ const Comment = require("../model/Comment_Model");
 
 exports.getAllPostsPage = (req, res) => {
   const Username = req.session.userid;
+  let comments = [];
+  Comment.find()
+    .then(([commentsData]) => {
+      comments = [...commentsData];
+    })
+    .catch((err) => console.error(err.message));
   Post.find()
-    .then(([articles]) => {
-      res.render("posts", { articles: articles, username: Username });
+    .then(([articlesData]) => {
+      res.render("posts", {
+        articles: articlesData,
+        username: Username,
+        comments: comments,
+      });
     })
     .catch((err) => console.error(err.message));
 };
