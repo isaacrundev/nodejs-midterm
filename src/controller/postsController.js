@@ -4,20 +4,32 @@ const Comment = require("../model/Comment_Model");
 exports.getAllPostsPage = (req, res) => {
   const Username = req.session.userid;
   let comments = [];
+  let articles = [];
   Comment.find()
     .then(([commentsData]) => {
-      comments = [...commentsData];
+      return (comments = [...commentsData]);
     })
     .catch((err) => console.error(err.message));
   Post.find()
     .then(([articlesData]) => {
-      res.render("posts", {
-        articles: articlesData,
-        username: Username,
-        comments: comments,
-      });
+      articles = [...articlesData];
+      return articles;
     })
     .catch((err) => console.error(err.message));
+
+  console.log(comments);
+  console.log(articles);
+  res.render("posts", {
+    articles: articles.map((a) => ({
+      ...a,
+      comments: comments.reduce((acc, curr) => {
+        if (curr.articleId === a.id) {
+          return acc.push(curr);
+        }
+      }, []),
+    })),
+    username: Username,
+  });
 };
 
 exports.getNewPostPage = (req, res) => {
