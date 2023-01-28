@@ -3,30 +3,25 @@ const Comment = require("../model/Comment_Model");
 
 exports.getAllPostsPage = async (req, res) => {
   const Username = req.session.userid;
+  try {
+    const [comments] = await Comment.find();
+    const [articles] = await Post.find();
 
-  const comments = await Comment.find()
-    .then(([commentsData]) => {
-      return commentsData;
-    })
-    .catch((err) => console.error(err.message));
-  const articles = await Post.find()
-    .then(([articlesData]) => {
-      return articlesData;
-    })
-    .catch((err) => console.error(err.message));
-
-  res.render("posts", {
-    articles: articles.map((a) => ({
-      ...a,
-      comments: comments.reduce((acc, curr) => {
-        if (curr.Article_ID === a.Id) {
-          acc.push(curr);
-        }
-        return acc;
-      }, []),
-    })),
-    username: Username,
-  });
+    res.render("posts", {
+      articles: articles.map((a) => ({
+        ...a,
+        comments: comments.reduce((acc, curr) => {
+          if (curr.Article_ID === a.Id) {
+            acc.push(curr);
+          }
+          return acc;
+        }, []),
+      })),
+      username: Username,
+    });
+  } catch (error) {
+    console.error(err.message);
+  }
 };
 
 exports.getNewPostPage = (req, res) => {
