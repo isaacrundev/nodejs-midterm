@@ -26,6 +26,14 @@
             <button type="submit">Delete</button>
           </form>
         </div>
+        <% articles.map(i=>{i['comments'].map(c=>{if
+        (c['Article_ID']===article.Id) {%>
+        <div class="comment-container">
+          <h6><%= c['Username'] %></h6>
+          <p><%= c['Comment'] %></p>
+        </div>
+
+        <%}})})%>
 
         <div class="comment-input-container">
           <form action="posts/post_comment" method="post">

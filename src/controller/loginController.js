@@ -3,6 +3,7 @@ const User = require("../model/User_Model");
 let session;
 
 exports.getLoginPage = (req, res) => {
+  req.session.destroy();
   res.render("login");
 };
 

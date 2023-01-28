@@ -9,9 +9,9 @@ const {
 } = require("../controller/loginController");
 
 router.get("/", getLoginPage);
-router.get("/signup", checkSession, getSignUpPage);
+router.get("/signup", getSignUpPage);
 router.get("/logout", getLogoutPage);
 router.post("/login", postLogin);
-router.post("/submit", checkSession, postSignUp);
+router.post("/submit", postSignUp);
 
 module.exports = router;

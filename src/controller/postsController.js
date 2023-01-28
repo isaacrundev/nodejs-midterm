@@ -1,31 +1,28 @@
 const Post = require("../model/Post_Model");
 const Comment = require("../model/Comment_Model");
 
-exports.getAllPostsPage = (req, res) => {
+exports.getAllPostsPage = async (req, res) => {
   const Username = req.session.userid;
-  let comments = [];
-  let articles = [];
-  Comment.find()
+
+  const comments = await Comment.find()
     .then(([commentsData]) => {
-      return (comments = [...commentsData]);
+      return commentsData;
     })
     .catch((err) => console.error(err.message));
-  Post.find()
+  const articles = await Post.find()
     .then(([articlesData]) => {
-      articles = [...articlesData];
-      return articles;
+      return articlesData;
     })
     .catch((err) => console.error(err.message));
 
-  console.log(comments);
-  console.log(articles);
   res.render("posts", {
     articles: articles.map((a) => ({
       ...a,
       comments: comments.reduce((acc, curr) => {
-        if (curr.articleId === a.id) {
-          return acc.push(curr);
+        if (curr.Article_ID === a.Id) {
+          acc.push(curr);
         }
+        return acc;
       }, []),
     })),
     username: Username,
