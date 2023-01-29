@@ -8,46 +8,67 @@
     <title>Posts</title>
   </head>
   <body>
-    <h3>Welcome back! <%= username %></h3>
-    <a href="/posts/new_post">New Post</a>
-    <a href="/logout">Log out</a>
-    <% articles.forEach(article => { %>
-    <ul>
-      <li>
-        <div>
-          <h4><%= article.Username %></h4>
-          <h4><%= article.Title %></h4>
-          <p><%= article.Content %></p>
-          <a href="/posts/edit/<%= article.Id %> ">Edit</a>
-          <form
-            action="/posts/delete/<%= article.Id %>?_method=DELETE"
-            method="post"
-          >
-            <button type="submit">Delete</button>
-          </form>
-        </div>
-        <% articles.map(i=>{i['comments'].map(c=>{if
-        (c['Article_ID']===article.Id) {%>
-        <div class="comment-container">
-          <h6><%= c['Username'] %></h6>
-          <p><%= c['Comment'] %></p>
-        </div>
+    <div class="flex bg-blue-900">
+      <div class="w-2/5 text-white h-12 pl-32 py-4 h-auto">
+        <nav class="flex flex-col gap-4 mt-5 px-2">
+          <h3 class="text-3xl font-bold py-8">Welcome back! <%= username %></h3>
+          <div>
+            <a
+              href="/posts/new_post"
+              class="bg-blue-400 w-48 mt-5 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full"
+              >New Post</a
+            >
+          </div>
+          <div>
+            <a
+              href="/logout"
+              class="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-blue-300"
+              >Log out</a
+            >
+          </div>
+        </nav>
+      </div>
+      <% articles.forEach(article => { %>
+      <div class="w-3/5 border border-gray-600 h-auto border-t-0">
+        <ul>
+          <li>
+            <div>
+              <h4><%= article.Username %></h4>
+              <h4><%= article.Title %></h4>
+              <p><%= article.Content %></p>
+              <a href="/posts/edit/<%= article.Id %> ">Edit</a>
+              <form
+                action="/posts/delete/<%= article.Id %>?_method=DELETE"
+                method="post"
+              >
+                <button type="submit">Delete</button>
+              </form>
+            </div>
+            <% articles.map(i=>{i['comments'].map(c=>{if
+            (c['Article_ID']===article.Id) {%>
+            <div class="comment-container">
+              <h6><%= c['Username'] %></h6>
+              <p><%= c['Comment'] %></p>
+            </div>
 
-        <%}})})%>
+            <%}})})%>
 
-        <div class="comment-input-container">
-          <form action="posts/post_comment" method="post">
-            <input type="hidden" name="Article_ID" value="<%= article.Id %>" />
-            <textarea name="CommentInput" cols="30" rows="2"></textarea
-            ><button type="submit">Comment</button>
-          </form>
-        </div>
-        <div class="comment-list-container"></div>
-      </li>
-    </ul>
-    <%}) %>
-    <script>
-      const comments = document.getElementsByClassName("");
-    </script>
+            <div class="comment-input-container">
+              <form action="posts/post_comment" method="post">
+                <input
+                  type="hidden"
+                  name="Article_ID"
+                  value="<%= article.Id %>"
+                />
+                <textarea name="CommentInput" cols="30" rows="2"></textarea
+                ><button type="submit">Comment</button>
+              </form>
+            </div>
+            <div class="comment-list-container"></div>
+          </li>
+        </ul>
+        <%}) %>
+      </div>
+    </div>
   </body>
 </html>
