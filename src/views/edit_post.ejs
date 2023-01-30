@@ -14,7 +14,6 @@
         action="/posts/edit/<%= data[0].Id %> "
         method="post"
         class="flex flex-col gap-2"
-        class="resize-none bg-white text-black font-medium text-lg w-full rounded-md"
       >
         <div class="flex flex-col gap-1">
           <div>Title</div>
@@ -22,16 +21,16 @@
             type="text"
             name="Title"
             value="<%= data[0].Title %> "
-            class="resize-none bg-white text-black font-medium text-lg w-full rounded-md"
+            class="resize-none bg-white text-black font-medium text-lg w-full rounded-md p-1"
           />
         </div>
-        <div>
+        <div class="flex flex-col gap-1">
           <div>Content</div>
           <textarea
             name="Content"
             cols="30"
             rows="10"
-            class="resize-none bg-white text-black font-medium text-lg w-full rounded-md"
+            class="resize-none bg-white text-black font-medium text-lg w-full rounded-md p-1"
           >
 <%= data[0].Content %></textarea
           >
