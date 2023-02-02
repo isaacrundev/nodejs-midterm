@@ -8,14 +8,6 @@ const pool = mysql.createPool({
   port: process.env.FREEMYSQL_PORT,
 });
 
-// const pool = mysql.createPool({
-//   host: process.env.MYSQLHOST,
-//   user: process.env.MYSQLUSER,
-//   password: process.env.MYSQLPASSWORD,
-//   database: process.env.MYSQLDATABASE,
-//   port: process.env.MYSQLPORT,
-// });
-
 const articlesDataSql = `SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='railway' AND TABLE_NAME='Articles';`;
 
 pool.query(articlesDataSql, (err, data) => {
