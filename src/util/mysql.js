@@ -1,11 +1,11 @@
 const mysql = require("mysql2");
 
 const pool = mysql.createPool({
-  host: process.env.FREEMYSQL_HOST,
-  user: process.env.FREEMYSQL_USER,
-  password: process.env.FREEMYSQL_PSWD,
-  database: process.env.FREEMYSQL_DBNAME,
-  port: process.env.FREEMYSQL_PORT,
+  host: process.env.MYSQLHOST,
+  user: process.env.MYSQLUSER,
+  password: process.env.MYSQLPASSWORD,
+  database: process.env.MYSQLDATABASE,
+  port: process.env.MYSQLPORT,
 });
 
 const articlesDataSql = `SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='railway' AND TABLE_NAME='Articles';`;
